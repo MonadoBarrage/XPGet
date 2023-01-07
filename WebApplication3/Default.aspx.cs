@@ -27,14 +27,12 @@ namespace WebApplication3
             }
             //Mode of play. I could have gotten the value and swiched on that but meh.
             int ModeOfPlay = ModeDropDownList.SelectedIndex;
-            int[] XP = XPCalc(NumberOfPlayers, NumberOfTimeUnits);
+            int[] XP = XPCalc(NumberOfPlayers, NumberOfTimeUnits,ModeOfPlay);
             string NewContentForTextBox = "";
-            int Winner;
-            int Loser;
-            int NumberOfWinners = 1;
 
             switch (ModeOfPlay)
             {
+
                 //Mode 0: Ranked Play
                 case 0:
                     for (int n = 0; n < XP.Length; ++n)
@@ -42,59 +40,29 @@ namespace WebApplication3
                         NewContentForTextBox += $"{AddOrdinal(n + 1)} Place: {XP[n]}{Environment.NewLine}";
                     }
                     break;
+
                 //Mode 1: Co - Op
                 case 1:
-                    NewContentForTextBox = $"Everybody earns {XP.Sum() / XP.Length} XP";
+                    NewContentForTextBox = $"Winners: {XP[0] } XP{Environment.NewLine}Losers {XP[1]}";   
                     break;
-                //Mode 2: X Winners
+
+                //Mode 2: Party
                 case 2:
-                    if (!int.TryParse(HelperInformationTextBox.Text, out NumberOfWinners))
-                    {
-                        NumberOfWinners = 1;
-                    }
+                    
+                    goto case 1;
 
-                    goto case 4;
-                //break;
-                //Mode 3: X Losers
+                //Mode 3: Teams
                 case 3:
-                    if (!int.TryParse(HelperInformationTextBox.Text, out NumberOfWinners))
-                    {
-                        NumberOfWinners = 1;
-                    }
+                
+                    goto case 1;
 
-                    NumberOfWinners = NumberOfPlayers - NumberOfWinners;
-
-                    goto case 4;
-                //Mode 4: Teams
-                case 4:
-                    if (NumberOfWinners <= 0 || NumberOfWinners >= NumberOfPlayers)
-                    {
-                        goto case 1;
-                    }
-
-                    Winner = 0;
-                    Loser = 0;
-                    for (int n = 0; n < XP.Length; ++n)
-                    {
-                        if (n < NumberOfWinners)
-                        {
-                            Winner += XP[n];
-                        }
-                        else
-                        {
-                            Loser += XP[n];
-                        }
-                    }
-
-                    Winner /= NumberOfWinners;
-                    Loser /= NumberOfPlayers - NumberOfWinners;
-
-                    NewContentForTextBox = $"Winners: {Winner}{Environment.NewLine}Losers: {Loser}";
-                    break;
                 //This should never be hit, but if it is hit at least the program shows something.
                 default:
                     goto case 0;
+
+
             }
+
             //Write the content to the textbox
             TextBox1.Text = NewContentForTextBox;
             //Try to log the file (if it fails it's not a big deal)
@@ -139,61 +107,60 @@ namespace WebApplication3
             }
         }
 
-        protected static readonly Dictionary<double, double> SigmoidComputations = new Dictionary<double, double>();
 
-        protected double Sigmoid(double x)
-        {
-            if (!SigmoidComputations.ContainsKey(x))
-            {
-                SigmoidComputations.Add(x, 1 / (1 + Math.Exp(-x)));
-            }
-            return SigmoidComputations[x];
+        protected int BSOffSet()
+        {   
+
+            Random g = new Random();
+            int bs = g.Next(1,5);
+            return bs;
+
         }
 
-        protected int BSOffSet(int n)
+        protected int[] XPCalc(int Players, int Time, int Mode)
         {
-            switch (n % 3)
-            {
+            int[] XPList = new int[Players];
+            int points = 100;
+            int xtra = 100;
+            switch(Mode){
+                
+                //Ranked plays
                 case 0:
-                    return 0;
+                    int i = 1;
+                    double baseP = 0.66 * points * Time; 
+                    
+                    for(i = 0; i < Players-1 && i < 6; i++){
+                        XPList[i] = (int)(baseP +(xtra * Time)/(i+1) + BSOffSet());
+                    }
+                    for (int j = i; j < Players; j++){
+                        XPList[j] = (int)(baseP + BSOffSet());
+                    }
+                
+
+                    break;
+
+                //Co-op
                 case 1:
-                    return -2;
+                    //XPList[0] = points for winners
+                    XPList[0] = (int)((points * Time) + (xtra * Time) + BSOffSet());
+
+                    //XPList[1] = points for losers
+                    XPList[1] = (int)((points * Time) + (0.75 * xtra * Time) + BSOffSet());
+                    break;
+
+                //Party
                 case 2:
-                    return 2;
-                default:
-                    goto case 0;
+                    goto case 1;
+
+                //Teams
+                case 3:
+                    goto case 1;
+
             }
+
+            return XPList;
         }
-
-        protected int[] XPCalc(int Players, int Time)
-        {
-            double[] XPList = new double[Players];
-            double ScaledTime = Time / 15.0;
-
-            XPList[0] = 5 * Players;
-            
-            for (int n = 1; n < Players; ++n)
-            {
-                double XP1 = 5.0 * Players / Math.Pow(2, n);
-                double XP2 = 5.0 * Players / (n + 1);
-                XPList[n] = XP1 * Sigmoid(Players - 4) + XP2 * Sigmoid(4 - Players) + BSOffSet(n);
-            }
-
-            int[] XP = XPList
-                .Select(z => (int)Math.Round(z * ScaledTime)) //Compute XP Value
-                .Select(z => Math.Max(z, 1)).ToArray(); //XP Minimum Must Be At Least 1
-
-            for (int n = XP.Length - 1; n > 0; --n)
-            {
-                if (!(XP[n] < XP[n - 1]))
-                {
-                    XP[n - 1] = XP[n] + 1;
-                }
-            }
-
-            return XP;
-        }
-
+        /*
         protected void ModeDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (ModeDropDownList.SelectedIndex)
@@ -219,5 +186,6 @@ namespace WebApplication3
 
             }
         }
+        */
     }
 }

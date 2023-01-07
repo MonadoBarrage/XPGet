@@ -18,11 +18,11 @@
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="MinutesPlayedTextBox" Display="Dynamic" ErrorMessage="Required" ForeColor="Red"></asp:RequiredFieldValidator>
         </p>
         <p>
-            <asp:DropDownList ID="ModeDropDownList" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ModeDropDownList_SelectedIndexChanged">
+            <asp:DropDownList ID="ModeDropDownList" runat="server" AutoPostBack="True">
                 <asp:ListItem Selected="True">Ranked</asp:ListItem>
                 <asp:ListItem>Co-op Game</asp:ListItem>
-                <asp:ListItem>Unranked Winners</asp:ListItem>
-                <asp:ListItem>Unranked Losers</asp:ListItem>
+                <asp:ListItem>Party</asp:ListItem>
+                <asp:ListItem>Teams</asp:ListItem>
             </asp:DropDownList>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Button ID="TheOnlyFuckingButton" runat="server" OnClick="Button1_Click" Text="Get XP" Height="34px" Width="180px" />
