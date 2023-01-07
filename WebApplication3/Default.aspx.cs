@@ -160,32 +160,6 @@ namespace WebApplication3
 
             return XPList;
         }
-        /*
-        protected void ModeDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (ModeDropDownList.SelectedIndex)
-            {
-                case 0:
-                case 1:
-                    HelperInformationTextBox.Visible = false;
-                    HelperLabel.Visible = false;
-                    HelperInformationTextBox.Text = "";
-                    break;
-                case 2:
-                    HelperInformationTextBox.Visible = true;
-                    HelperLabel.Visible = true;
-                    HelperInformationTextBox.Text = "1";
-                    HelperLabel.Text = "Number of Winners";
-                    break;
-                case 3:
-                    HelperInformationTextBox.Visible = true;
-                    HelperLabel.Visible = true;
-                    HelperInformationTextBox.Text = "1";
-                    HelperLabel.Text = "Number of Losers";
-                    break;
-
-            }
-        }
-        */
+        
     }
 }
