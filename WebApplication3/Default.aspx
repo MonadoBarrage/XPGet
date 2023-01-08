@@ -20,7 +20,7 @@
         <p>
             <asp:DropDownList ID="ModeDropDownList" runat="server" AutoPostBack="True">
                 <asp:ListItem Selected="True">Ranked</asp:ListItem>
-                <asp:ListItem>Co-op Game</asp:ListItem>
+                <asp:ListItem>Co-op</asp:ListItem>
                 <asp:ListItem>Party</asp:ListItem>
                 <asp:ListItem>Teams</asp:ListItem>
             </asp:DropDownList>
