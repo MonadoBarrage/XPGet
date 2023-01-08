@@ -12,7 +12,7 @@ Revisions:
     - Modified Button1_Click function; game modes it checks for are as follows: ranked, co-op, party, teams 
     - Modified ModeDropDownList_SelectedIndexChanged function to remove user input boxes for number of winners and losers
   * Default.aspx
-    - Modified the drop-down list to include these game modes: Ranked, Co-op, Party, Teams
+    - Modified DropDownList to include these game modes: Ranked, Co-op, Party, Teams
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Forked from Snaredrumhero's repository.
