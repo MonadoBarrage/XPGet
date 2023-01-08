@@ -41,24 +41,10 @@ namespace WebApplication3
                     }
                     break;
 
-                //Mode 1: Co - Op
-                case 1:
+                //Mode 1: Co - Op, Party, Teams
+                default:
                     NewContentForTextBox = $"Winners: {XP[0] } XP{Environment.NewLine}Losers {XP[1]}";   
                     break;
-
-                //Mode 2: Party
-                case 2:
-                    
-                    goto case 1;
-
-                //Mode 3: Teams
-                case 3:
-                
-                    goto case 1;
-
-                //This should never be hit, but if it is hit at least the program shows something.
-                default:
-                    goto case 0;
 
 
             }
@@ -139,22 +125,14 @@ namespace WebApplication3
 
                     break;
 
-                //Co-op
-                case 1:
+                    //Co-op, Party, Teams
+                default:
                     //XPList[0] = points for winners
                     XPList[0] = (int)((points * Time) + BSOffSet());
 
                     //XPList[1] = points for losers
                     XPList[1] = (int)(0.70 * (points * Time) + BSOffSet());
                     break;
-
-                //Party
-                case 2:
-                    goto case 1;
-
-                //Teams
-                case 3:
-                    goto case 1;
 
             }
 
