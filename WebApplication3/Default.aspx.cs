@@ -108,18 +108,19 @@ namespace WebApplication3
             int[] XPList = new int[Players];
             int points = 100;
             int xtra = 100;
-            switch(Mode){
+
+            double basePoints = 0.75 * points * Time;
+            switch (Mode){
                 
                 //Ranked plays
                 case 0:
                     int i = 1;
-                    double baseP = 0.75 * points * Time; 
                     
                     for(i = 0; i < Players-1 && i < 6; i++){
-                        XPList[i] = (int)(baseP +(xtra * Time)/(i+1) + BSOffSet());
+                        XPList[i] = (int)(basePoints + (xtra * Time)/(i+1) + BSOffSet());
                     }
                     for (int j = i; j < Players; j++){
-                        XPList[j] = (int)(baseP + BSOffSet());
+                        XPList[j] = (int)(basePoints + BSOffSet());
                     }
                 
 
@@ -128,10 +129,10 @@ namespace WebApplication3
                     //Co-op, Party, Teams
                 default:
                     //XPList[0] = points for winners
-                    XPList[0] = (int)((points * Time) + BSOffSet());
+                    XPList[0] = (int)((basePoints + 0.25 * (xtra * Time)) + BSOffSet());
 
                     //XPList[1] = points for losers
-                    XPList[1] = (int)(0.70 * (points * Time) + BSOffSet());
+                    XPList[1] = (int)(basePoints + BSOffSet());
                     break;
 
             }
