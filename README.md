@@ -9,7 +9,7 @@ Revisions:
     - Removed Sigmoid function and any mention of it throughout the file
     - Modified BSOffset function
     - Heavily modified XPCalc function to provide more fairer calculations and distributions of points; all players earn a base amount of points with higher ranked players earning additional xp
-    - Modified Button1_Click function; game modes it checks for are as follows: ranked, co-op, party, teams 
+    - Modified Button1_Click function; game modes it checks for are as follows: Ranked, Co-op, Party, Teams 
     - Modified ModeDropDownList_SelectedIndexChanged function to remove user input boxes for number of winners and losers
   * Default.aspx
     - Modified DropDownList to include these game modes: Ranked, Co-op, Party, Teams
