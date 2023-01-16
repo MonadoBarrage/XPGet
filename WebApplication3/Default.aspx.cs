@@ -94,45 +94,37 @@ namespace WebApplication3
         }
 
 
-        protected int BSOffSet()
-        {   
-
-            Random g = new Random();
-            int bs = g.Next(1,5);
-            return bs;
-
-        }
+  
 
         protected int[] XPCalc(int Players, int Time, int Mode)
         {
             int[] XPList = new int[Players];
-            int points = 100;
-            int xtra = 100;
+            int points = 100;//scale of points awarded (makes numbers bigger bc big numbers are fun)
+            int xtra = points/3;//xtra is points/(n-1) where 1/n = fraction of points based off bonus 
 
             double basePoints = 0.75 * points * Time;
             switch (Mode){
                 
                 //Ranked plays
-                case 0:
-                    int i = 1;
-                    
-                    for(i = 0; i < Players-1 && i < 6; i++){
-                        XPList[i] = (int)(basePoints + (xtra * Time)/(i+1) + BSOffSet());
+                case 0://shift down so smaller games score less
+                    for (int i = 0; i < Players && i < 6; i++)
+                    {
+                        XPList[i] = (int)(basePoints + (xtra * Time) / (i + 1));
                     }
-                    for (int j = i; j < Players; j++){
-                        XPList[j] = (int)(basePoints + BSOffSet());
+                    for (int i = 6; i < Players; i++)
+                    {
+                        XPList[i] = (int)(basePoints);
                     }
-                
 
                     break;
 
                     //Co-op, Party, Teams
-                default:
+                default://winning gets 2nd/3rdish then loosers get base points
                     //XPList[0] = points for winners
-                    XPList[0] = (int)((basePoints + 0.25 * (xtra * Time)) + BSOffSet());
+                    XPList[0] = (int)((basePoints + (xtra * Time)/2));//equivalent to 2nd place in a ranked game
 
                     //XPList[1] = points for losers
-                    XPList[1] = (int)(basePoints + BSOffSet());
+                    XPList[1] = (int)(basePoints);
                     break;
 
             }
