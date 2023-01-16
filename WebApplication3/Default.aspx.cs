@@ -107,15 +107,24 @@ namespace WebApplication3
                 
                 //Ranked plays
                 case 0://shift down so smaller games score less
-                    for (int i = 0; i < Players && i < 6; i++)
+                    if (Players >= 6)
                     {
-                        XPList[i] = (int)(basePoints + (xtra * Time) / (i + 1));
+                        for (int i = 0; i < Players && i < 6; i++)
+                        {
+                            XPList[i] = (int)(basePoints + (xtra * Time) / (i + 1));
+                        }
+                        for (int i = 6; i < Players; i++)
+                        {
+                            XPList[i] = (int)(basePoints);
+                        }
                     }
-                    for (int i = 6; i < Players; i++)
+                    else
                     {
-                        XPList[i] = (int)(basePoints);
+                        for (int i = 0; i < Players && i < 6; i++)
+                        {
+                            XPList[i] = (int)(basePoints + (xtra * Time) / (i + 1 + 6- Players));
+                        }
                     }
-
                     break;
 
                     //Co-op, Party, Teams
