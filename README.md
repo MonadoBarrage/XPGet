@@ -3,6 +3,12 @@ XPGet is used to calculate points each player gains after playing a board game b
 
 Revisions:
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2022-01-16
+ * Default.aspx.cs
+   - Removed BSOffset function
+   - Modified XPCalc function so that bigger groups earn more points than smaller groups in ranked play. Also changed calculations in party/team/co-op games so that they earn what second place earns in ranked plays.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 2022-01-08 
 
   * Default.aspx.cs
