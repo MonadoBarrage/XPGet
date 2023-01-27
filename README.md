@@ -33,7 +33,8 @@ Revisions:
     - Modified DropDownList to include these game modes: Ranked, Co-op, Party, Teams
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Forked from Snaredrumhero's repository.
+Forked from Snaredrumhero's repository.  
+Original code made by pikcube: https://github.com/pikcube
 
-Main code in Defaut.aspx.cs   
+Main code in Default.aspx.cs   
 JavaScript in Default.aspx
