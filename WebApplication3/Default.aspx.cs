@@ -127,7 +127,7 @@ namespace WebApplication3
                 //Ranked plays
                 case 0:
                     int i = 1;
-                    double baseP = 0.66 * points * Time; 
+                    double baseP = 0.75 * points * Time; 
                     
                     for(i = 0; i < Players-1 && i < 6; i++){
                         XPList[i] = (int)(baseP +(xtra * Time)/(i+1) + BSOffSet());
@@ -142,10 +142,10 @@ namespace WebApplication3
                 //Co-op
                 case 1:
                     //XPList[0] = points for winners
-                    XPList[0] = (int)((points * Time) + (xtra * Time) + BSOffSet());
+                    XPList[0] = (int)((points * Time) + BSOffSet());
 
                     //XPList[1] = points for losers
-                    XPList[1] = (int)((points * Time) + (0.75 * xtra * Time) + BSOffSet());
+                    XPList[1] = (int)(0.70 * (points * Time) + BSOffSet());
                     break;
 
                 //Party
