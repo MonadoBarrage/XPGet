@@ -100,7 +100,7 @@ namespace WebApplication3
         {
             const int rankedPositions = 5;
             const double points = 1.5;//scale of points awarded (makes numbers bigger bc big numbers are fun)
-            const double xtra = points/2;//xtra is points/(n-1) where 1/n = fraction of points based off bonus 
+            double xtra = points/2;//xtra is points/(n-1) where 1/n = fraction of points based off bonus 
             int[] XPList = new int[Players];
 
             double basePoints = points * Time;
@@ -121,9 +121,10 @@ namespace WebApplication3
                     }
                     else
                     {
-                        for (int i = 0; i < Players && i < rankedPositions; i++)
+                        xtra = (double)(xtra * Players) / (double)rankedPositions;
+                        for (int i = 0; i < Players; i++)
                         {
-                            XPList[i] = (int)(basePoints + (xtra * Time) / (i + 1 + rankedPositions- Players));
+                            XPList[i] = (int)(basePoints + (xtra * Time) / (i * rankedPositions / (double)Players + 1.0));
                         }
                     }
                     break;
