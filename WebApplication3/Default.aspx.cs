@@ -98,31 +98,32 @@ namespace WebApplication3
 
         protected int[] XPCalc(int Players, int Time, int Mode)
         {
+            const int rankedPositions = 5;
+            const double points = 1.5;//scale of points awarded (makes numbers bigger bc big numbers are fun)
+            const double xtra = points/2;//xtra is points/(n-1) where 1/n = fraction of points based off bonus 
             int[] XPList = new int[Players];
-            int points = 100;//scale of points awarded (makes numbers bigger bc big numbers are fun)
-            int xtra = points/3;//xtra is points/(n-1) where 1/n = fraction of points based off bonus 
 
-            double basePoints = 0.75 * points * Time;
+            double basePoints = points * Time;
             switch (Mode){
                 
                 //Ranked plays
-                case 0://shift down so smaller games score less
-                    if (Players >= 6)
+                case 0:
+                    if (Players >= rankedPositions)
                     {
-                        for (int i = 0; i < Players && i < 6; i++)
+                        for (int i = 0; i < Players && i < rankedPositions; i++)
                         {
                             XPList[i] = (int)(basePoints + (xtra * Time) / (i + 1));
                         }
-                        for (int i = 6; i < Players; i++)
+                        for (int i = rankedPositions; i < Players; i++)
                         {
                             XPList[i] = (int)(basePoints);
                         }
                     }
                     else
                     {
-                        for (int i = 0; i < Players && i < 6; i++)
+                        for (int i = 0; i < Players && i < rankedPositions; i++)
                         {
-                            XPList[i] = (int)(basePoints + (xtra * Time) / (i + 1 + 6- Players));
+                            XPList[i] = (int)(basePoints + (xtra * Time) / (i + 1 + rankedPositions- Players));
                         }
                     }
                     break;
