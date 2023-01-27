@@ -1,6 +1,6 @@
 # XPGet
 XPGet is used to calculate points each player gains after playing a board game based on ranking, time, and number of players.  
-Link to Current Website: https://xpgetsystem.azurewebsites.net/ 
+Link to Current Website: https://xpgetsystem.azurewebsites.net/  
 Revisions:
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 2022-01-27
