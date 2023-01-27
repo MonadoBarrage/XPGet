@@ -6,7 +6,7 @@ Revisions:
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 2022-01-27
  * Web App
-   - Website has now been built and published online to be used. Microsoft Azure used to publish. 
+   - Website has now been built and published online (using Microsoft Azure).
    - Link: https://xpgetsystem.azurewebsites.net/
  * Default.aspx.cs
    - Further modified the code 
